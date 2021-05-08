@@ -4,9 +4,12 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
 
+import br.com.zupacademy.izabella.ecommerce.compartilhado.validacao.UniqueValue;
+
 public class NovoUsuarioRequest {
 
 	@NotBlank
+	@UniqueValue(domainClass = Usuario.class, fieldName = "login")
 	private String login;
 
 	@NotBlank
