@@ -1,7 +1,10 @@
 package br.com.zupacademy.izabella.ecommerce.usuario;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.Optional;
 
-public interface usuarioRepository extends CrudRepository<Usuario, Long>{
+import org.springframework.data.jpa.repository.JpaRepository;
 
+public interface usuarioRepository extends JpaRepository<Usuario, Long> {
+
+	Optional<Usuario> findByLogin(String login);
 }
