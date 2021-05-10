@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/usuarios")
-public class NovoUsuarioController {
+public class UsuarioController {
 
 	@Autowired
-	private usuarioRepository usuarioRepository;
+	private UsuarioRepository usuarioRepository;
 
 	@PostMapping
 	public ResponseEntity<?> criaUsuario(@RequestBody @Valid NovoUsuarioRequest request) {

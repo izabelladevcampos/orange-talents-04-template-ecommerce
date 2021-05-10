@@ -29,6 +29,10 @@ public class Perfil implements GrantedAuthority {
 		return nome;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
 	@Override
 	public String getAuthority() {
 		return nome;

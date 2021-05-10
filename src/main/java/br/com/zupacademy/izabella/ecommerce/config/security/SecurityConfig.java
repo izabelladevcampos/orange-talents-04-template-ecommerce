@@ -14,7 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import br.com.zupacademy.izabella.ecommerce.usuario.usuarioRepository;
+import br.com.zupacademy.izabella.ecommerce.usuario.UsuarioRepository;
 
 @EnableWebSecurity
 @Configuration
@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private TokenService tokenService;
 	
 	@Autowired
-	private usuarioRepository usuarioRepository;
+	private UsuarioRepository usuarioRepository;
 
 	@Override
 	@Bean

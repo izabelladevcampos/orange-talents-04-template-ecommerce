@@ -12,19 +12,19 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import br.com.zupacademy.izabella.ecommerce.usuario.Usuario;
-import br.com.zupacademy.izabella.ecommerce.usuario.usuarioRepository;
+import br.com.zupacademy.izabella.ecommerce.usuario.UsuarioRepository;
 
 public class AutenticacaoViaTokenFilter extends OncePerRequestFilter {
 
 	private TokenService tokenService;
-	private usuarioRepository usuarioRepository;
+	private UsuarioRepository usuarioRepository;
 
 	public AutenticacaoViaTokenFilter(TokenService tokenService) {
 		this.tokenService = tokenService;
 	}
 
 	public AutenticacaoViaTokenFilter(TokenService tokenService,
-			br.com.zupacademy.izabella.ecommerce.usuario.usuarioRepository usuarioRepository) {
+			br.com.zupacademy.izabella.ecommerce.usuario.UsuarioRepository usuarioRepository) {
 		this.tokenService = tokenService;
 		this.usuarioRepository = usuarioRepository;
 	}

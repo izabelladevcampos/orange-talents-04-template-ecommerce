@@ -9,13 +9,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.com.zupacademy.izabella.ecommerce.usuario.Usuario;
-import br.com.zupacademy.izabella.ecommerce.usuario.usuarioRepository;
+import br.com.zupacademy.izabella.ecommerce.usuario.UsuarioRepository;
 
 @Service
 public class AutenticacaoService implements UserDetailsService {
 
 	@Autowired
-	private usuarioRepository usuarioRepository;
+	private UsuarioRepository usuarioRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

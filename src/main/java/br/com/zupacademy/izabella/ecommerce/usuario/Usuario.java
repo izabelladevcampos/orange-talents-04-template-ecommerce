@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,13 +30,14 @@ public class Usuario implements UserDetails {
 
 	@NotBlank
 	@Email
+	@Column(unique = true)
 	private String login;
 
 	@NotBlank
 	@Length(min = 6)
 	private String senha;
 
-	@NotNull
+	@PastOrPresent
 	private LocalDateTime instanteCriacao = LocalDateTime.now();
 
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -63,8 +66,8 @@ public class Usuario implements UserDetails {
 		return senha;
 	}
 
-	public List<Perfil> getPerfis() {
-		return perfis;
+	public LocalDateTime getInstanteCriacao() {
+		return instanteCriacao;
 	}
 
 	@Override
@@ -101,5 +104,14 @@ public class Usuario implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", login=" + login + ", senha=" + senha + ", instanteCriacao=" + instanteCriacao
+				+ ", perfis=" + perfis + "]";
+	}
+	
+	
+	
 
 }

@@ -13,7 +13,7 @@ public class NovaCategoriaRequest {
 
 	@NotBlank
 	@UniqueValue(domainClass = Categoria.class, fieldName = "nome", message = "O nome informado para a categoria já existe")
-	private String nome;
+	private final String nome;
 
 	@Positive
 	@ExistsValue(targetClass = Categoria.class, fieldName = "id", required = false, message = "O id da categoria informada não existe!")
@@ -28,6 +28,14 @@ public class NovaCategoriaRequest {
 		this.idCategoriaMae = idCategoriaMae;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public Long getIdCategoriaMae() {
+		return idCategoriaMae;
+	}
+
 	public Categoria toModel(EntityManager manager) {
 		Categoria categoria = new Categoria(this.nome);
 
@@ -39,4 +47,5 @@ public class NovaCategoriaRequest {
 		return categoria;
 
 	}
+
 }

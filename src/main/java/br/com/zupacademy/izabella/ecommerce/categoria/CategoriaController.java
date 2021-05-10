@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/categorias")
-public class NovaCategoriaController {
+public class CategoriaController {
 
 	@PersistenceContext
 	private EntityManager manager;
