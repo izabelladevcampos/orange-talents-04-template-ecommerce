@@ -25,6 +25,7 @@ import org.hibernate.validator.constraints.Length;
 import br.com.zupacademy.izabella.ecommerce.caracteristica.CaracteristicaProduto;
 import br.com.zupacademy.izabella.ecommerce.caracteristica.NovaCaracteristicaProdutoRequest;
 import br.com.zupacademy.izabella.ecommerce.categoria.Categoria;
+import br.com.zupacademy.izabella.ecommerce.produto.imagem.ImagemProduto;
 import br.com.zupacademy.izabella.ecommerce.usuario.Usuario;
 
 @Entity
@@ -65,6 +66,9 @@ public class Produto {
 	@NotNull
 	private LocalDateTime instanteCriacao = LocalDateTime.now();
 
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+	private Set<ImagemProduto> imagens = new HashSet<>();
+
 	@Deprecated
 	public Produto() {
 
@@ -80,7 +84,8 @@ public class Produto {
 		this.quantidade = quantidade;
 		this.descricao = descricao;
 		this.categoria = categoria;
-		this.caracteristicas.addAll(caracteristicas.stream().map(caracteristica -> caracteristica.toModel(this))
+		this.caracteristicas.addAll(caracteristicas.stream()
+				.map(caracteristica -> caracteristica.toModel(this))
 				.collect(Collectors.toSet()));
 		this.resgistroUsuario = usuario;
 
@@ -120,6 +125,17 @@ public class Produto {
 
 	public LocalDateTime getInstanteCriacao() {
 		return instanteCriacao;
+	}
+
+	public void associaImagem(Set<String> links) {
+		Set<ImagemProduto> imagens = links.stream()
+				.map(link -> new ImagemProduto(this, link))
+				.collect(Collectors.toSet());
+		this.imagens.addAll(imagens);
+	}
+
+	public boolean pertenceAoUsuario(Usuario usuarioLogado, Produto produto) {
+		return usuarioLogado.getId().equals(produto.getUsuarioCriador().getId());
 	}
 
 }

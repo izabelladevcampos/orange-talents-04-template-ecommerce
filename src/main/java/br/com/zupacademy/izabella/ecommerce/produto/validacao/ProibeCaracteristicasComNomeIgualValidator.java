@@ -1,10 +1,12 @@
 
-package br.com.zupacademy.izabella.ecommerce.produto;
+package br.com.zupacademy.izabella.ecommerce.produto.validacao;
 
 import java.util.Set;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+
+import br.com.zupacademy.izabella.ecommerce.produto.NovoProdutoRequest;
 
 public class ProibeCaracteristicasComNomeIgualValidator implements Validator {
 
