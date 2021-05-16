@@ -1,4 +1,4 @@
-package br.com.zupacademy.izabella.ecommerce.caracteristica;
+package br.com.zupacademy.izabella.ecommerce.produto.caracteristica;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

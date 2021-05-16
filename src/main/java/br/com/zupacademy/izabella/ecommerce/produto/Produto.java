@@ -22,9 +22,9 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Length;
 
-import br.com.zupacademy.izabella.ecommerce.caracteristica.CaracteristicaProduto;
-import br.com.zupacademy.izabella.ecommerce.caracteristica.NovaCaracteristicaProdutoRequest;
-import br.com.zupacademy.izabella.ecommerce.categoria.Categoria;
+import br.com.zupacademy.izabella.ecommerce.produto.caracteristica.CaracteristicaProduto;
+import br.com.zupacademy.izabella.ecommerce.produto.caracteristica.NovaCaracteristicaProdutoRequest;
+import br.com.zupacademy.izabella.ecommerce.produto.categoria.Categoria;
 import br.com.zupacademy.izabella.ecommerce.produto.imagem.ImagemProduto;
 import br.com.zupacademy.izabella.ecommerce.usuario.Usuario;
 

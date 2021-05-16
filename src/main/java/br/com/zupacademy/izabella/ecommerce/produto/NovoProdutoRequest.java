@@ -13,9 +13,9 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Length;
 
-import br.com.zupacademy.izabella.ecommerce.caracteristica.NovaCaracteristicaProdutoRequest;
-import br.com.zupacademy.izabella.ecommerce.categoria.Categoria;
 import br.com.zupacademy.izabella.ecommerce.compartilhado.validacao.ExistsValue;
+import br.com.zupacademy.izabella.ecommerce.produto.caracteristica.NovaCaracteristicaProdutoRequest;
+import br.com.zupacademy.izabella.ecommerce.produto.categoria.Categoria;
 import br.com.zupacademy.izabella.ecommerce.usuario.Usuario;
 
 public class NovoProdutoRequest {
@@ -93,6 +93,7 @@ public class NovoProdutoRequest {
 	public Produto toModel(EntityManager manager, Usuario usuario) {
 		Categoria categoria = manager.find(Categoria.class, idCategoria);
 		Usuario usuarioLogado = manager.find(Usuario.class, usuario.getId());
+		
 		return new Produto(this.nome, this.valor, this.quantidade, this.descricao, categoria, caracteristicas,
 				usuarioLogado);
 	}

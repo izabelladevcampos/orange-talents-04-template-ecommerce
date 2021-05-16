@@ -1,4 +1,4 @@
-package br.com.zupacademy.izabella.ecommerce.categoria;
+package br.com.zupacademy.izabella.ecommerce.produto.categoria;
 
 import javax.persistence.EntityManager;
 import javax.validation.constraints.NotBlank;
