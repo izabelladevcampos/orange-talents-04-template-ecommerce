@@ -16,27 +16,30 @@ import br.com.zupacademy.izabella.ecommerce.produto.Produto;
 @Entity
 public class ImagemProduto {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@ManyToOne
-	@NotNull
-	@Valid
-	private Produto produto;
+    @ManyToOne
+    @NotNull
+    @Valid
+    private Produto produto;
 
-	@URL
-	@NotBlank
-	private String link;
+    @URL
+    @NotBlank
+    private String link;
 
-	@Deprecated
-	public ImagemProduto() {
+    @Deprecated
+    public ImagemProduto() {
 
-	}
+    }
 
-	public ImagemProduto(@NotNull @Valid Produto produto, @URL String link) {
-		this.produto = produto;
-		this.link = link;
-	}
+    public ImagemProduto(@NotNull @Valid Produto produto, @URL String link) {
+        this.produto = produto;
+        this.link = link;
+    }
 
+    public String getLink() {
+        return link;
+    }
 }
