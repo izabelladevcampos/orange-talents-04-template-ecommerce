@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 
 import org.hibernate.validator.constraints.Length;
@@ -24,94 +23,92 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 public class Usuario implements UserDetails {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@NotBlank
-	@Email
-	@Column(unique = true)
-	private String login;
+    @NotBlank
+    @Email
+    @Column(unique = true)
+    private String login;
 
-	@NotBlank
-	@Length(min = 6)
-	private String senha;
+    @NotBlank
+    @Length(min = 6)
+    private String senha;
 
-	@PastOrPresent
-	private LocalDateTime instanteCriacao = LocalDateTime.now();
+    @PastOrPresent
+    private LocalDateTime instanteCriacao = LocalDateTime.now();
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	private List<Perfil> perfis = new ArrayList<>();
-	
-	@Deprecated
-	public Usuario() {
-	
-	}
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Perfil> perfis = new ArrayList<>();
 
-	public Usuario(@NotBlank @Email String login, @NotBlank @Length(min = 6) SenhaLimpa senha) {
-		this.login = login;
-		this.senha = senha.hash();
+    @Deprecated
+    public Usuario() {
 
-	}
+    }
 
-	public Long getId() {
-		return id;
-	}
-	
-	public String getLogin() {
-		return login;
-	}
+    public Usuario(@NotBlank @Email String login, @NotBlank @Length(min = 6) SenhaLimpa senha) {
+        this.login = login;
+        this.senha = senha.hash();
 
-	public String getSenha() {
-		return senha;
-	}
+    }
 
-	public LocalDateTime getInstanteCriacao() {
-		return instanteCriacao;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return this.perfis;
-	}
+    public String getLogin() {
+        return login;
+    }
 
-	@Override
-	public String getPassword() {
-		return this.senha;
-	}
+    public String getSenha() {
+        return senha;
+    }
 
-	@Override
-	public String getUsername() {
-		return this.login;
-	}
+    public LocalDateTime getInstanteCriacao() {
+        return instanteCriacao;
+    }
 
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.perfis;
+    }
 
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
+    @Override
+    public String getPassword() {
+        return this.senha;
+    }
 
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
+    @Override
+    public String getUsername() {
+        return this.login;
+    }
 
-	@Override
-	public boolean isEnabled() {
-		return true;
-	}
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
 
-	@Override
-	public String toString() {
-		return "Usuario [id=" + id + ", login=" + login + ", senha=" + senha + ", instanteCriacao=" + instanteCriacao
-				+ ", perfis=" + perfis + "]";
-	}
-	
-	
-	
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario [id=" + id + ", login=" + login + ", senha=" + senha + ", instanteCriacao=" + instanteCriacao
+                + ", perfis=" + perfis + "]";
+    }
+
 
 }

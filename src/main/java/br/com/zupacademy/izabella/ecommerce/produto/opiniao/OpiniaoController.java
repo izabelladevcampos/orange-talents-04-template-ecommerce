@@ -26,9 +26,9 @@ public class OpiniaoController {
 	@PostMapping("/{id}/opiniao")
 	@Transactional
 	public ResponseEntity<?> criaOpiniao(@RequestBody @Valid NovaOpiniaoRequest request, @PathVariable Long id,
-			@AuthenticationPrincipal Usuario usuarioOpinador) {
+			@AuthenticationPrincipal Usuario consumidor) {
 		Produto produto = manager.find(Produto.class, id);
-		Opiniao opiniao = request.toModel(produto, usuarioOpinador);
+		Opiniao opiniao = request.toModel(produto, consumidor);
 		manager.persist(opiniao);
 		return ResponseEntity.ok().build();
 

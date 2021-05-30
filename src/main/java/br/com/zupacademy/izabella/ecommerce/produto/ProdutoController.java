@@ -28,46 +28,50 @@ import br.com.zupacademy.izabella.ecommerce.usuario.Usuario;
 @RequestMapping("/produtos")
 public class ProdutoController {
 
-	@PersistenceContext
-	private EntityManager manager;
+    @PersistenceContext
+    private EntityManager manager;
 
-	@Autowired
-	private UploaderFake uploaderFake;
+    @Autowired
+    private UploaderFake uploaderFake;
 
-	@InitBinder(value = "novoProdutoRequest")
-	public void init(WebDataBinder webDataBinder) {
-		webDataBinder.addValidators(new ProibeCaracteristicasComNomeIgualValidator());
-	}
+    @InitBinder(value = "novoProdutoRequest")
+    public void init(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(new ProibeCaracteristicasComNomeIgualValidator());
+    }
 
-	@PostMapping
-	@Transactional
-	public ResponseEntity<NovoProdutoRequest> criaProduto(@RequestBody @Valid NovoProdutoRequest request,
-			@AuthenticationPrincipal Usuario usuario) {
-		Produto produto = request.toModel(manager, usuario);
-		manager.persist(produto);
-		return ResponseEntity.ok().build();
-	}
+    @PostMapping
+    @Transactional
+    public ResponseEntity<NovoProdutoRequest> criaProduto(@RequestBody @Valid NovoProdutoRequest request,
+                                                          @AuthenticationPrincipal Usuario usuario) {
 
-	@PostMapping(value = "/{id}/imagens")
-	@Transactional
-	public ResponseEntity<?> adicionaImagens(@Valid NovasImagensRequest request, @PathVariable Long id,
-			@AuthenticationPrincipal Usuario usuarioLogado) {
+        System.out.println(request);
+        System.out.println(usuario);
 
-		Set<String> links = uploaderFake.envia(request.getImagens());
-		Produto produto = manager.find(Produto.class, id);
+        Produto produto = request.toModel(manager, usuario);
+        manager.persist(produto);
+        return ResponseEntity.ok().build();
+    }
 
-		if (produto == null) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O produto informado não foi encontrado!");
-		}
+    @PostMapping(value = "/{id}/imagens")
+    @Transactional
+    public ResponseEntity<?> adicionaImagens(@Valid NovasImagensRequest request, @PathVariable Long id,
+                                             @AuthenticationPrincipal Usuario usuarioLogado) {
 
-		if (!produto.pertenceAoUsuario(usuarioLogado, produto)) {
-			return ResponseEntity.status(HttpStatus.FORBIDDEN)
-					.body("somente o usuário criador pode incluir imagens no produto!");
-		}
+        Set<String> links = uploaderFake.envia(request.getImagens());
+        Produto produto = manager.find(Produto.class, id);
 
-		produto.associaImagem(links);
-		manager.merge(produto);
-		return ResponseEntity.ok().build();
-	}
+        if (produto == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O produto informado não foi encontrado!");
+        }
+
+        if (!produto.pertenceAoUsuario(usuarioLogado, produto)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body("somente o usuário criador pode incluir imagens no produto!");
+        }
+
+        produto.associaImagem(links);
+        manager.merge(produto);
+        return ResponseEntity.ok().build();
+    }
 
 }
